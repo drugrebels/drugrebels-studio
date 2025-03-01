@@ -1,13 +1,16 @@
 import {defineConfig} from 'sanity'
 import {structureTool} from 'sanity/structure'
-import {visionTool} from '@sanity/vision'
 import {schemaTypes} from './schemaTypes'
 
 // Plugins
+import {visionTool} from '@sanity/vision'
 import { vercelDeployTool } from 'sanity-plugin-vercel-deploy'
 import { languageFilter } from "@sanity/language-filter"
 import { media } from "sanity-plugin-media"
 
+// Components
+import StudioNavbar from "./components/StudioNavbar"
+import StudioLogo from "./components/StudioLogo"
 
 export default defineConfig({
   name: 'default',
@@ -29,5 +32,12 @@ export default defineConfig({
 
   schema: {
     types: schemaTypes,
+  },
+
+  studio: {
+    components: {
+      logo: StudioLogo,
+      navbar: StudioNavbar,
+    },
   },
 })
