@@ -16,12 +16,21 @@ export default defineConfig({
   projectId: '9gpurr7n',
   dataset: 'production',
 
-  plugins: [structureTool(), visionTool(), vercelDeployTool(), languageFilter({
+  plugins: [structureTool(), visionTool(), vercelDeployTool(),    languageFilter({
     supportedLanguages: [
       { id: "da", title: "Danish" },
       { id: "en", title: "English" },
     ],
-  }), media()],
+
+    defaultLanguages: ["da"],
+    documentTypes: ["drug", "newsbanner", "people"],
+    filterField: (enclosingType, field, selectedLanguageIds) =>
+      !enclosingType.name.startsWith("locale") || selectedLanguageIds.includes(field.name),
+  }),
+  media()
+],
+
+  defaultLanguages: ["da"],
 
   schema: {
     types: schemaTypes,
